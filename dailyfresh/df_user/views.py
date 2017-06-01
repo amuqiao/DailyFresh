@@ -11,8 +11,8 @@ def login(request):
     return render(request, 'df_user/login.html')
 
 def login_handle(request):
-    user_info = request.GET.get('user_info')
-    User_info.objects.filter()
+    pass
+
 
 def register(request):
     context = {'title':'天天生鲜-注册'}
@@ -31,13 +31,16 @@ def register_handle(request):
     pwd = dict.get('pwd')
     cpwd = dict.get('cpwd')
     email = dict.get('email')
+
     #密码加密
     s1=sha1()
     s1.update(pwd)
+    pwd2 = s1.hexdigest()
+
     #创建对象
     user = User_info()
     user.user_name = user_name
-    user.user_passwd = pwd
+    user.user_passwd = pwd2
     user.user_mail = email
     user.save()
     #注册成功,返回登陆页面

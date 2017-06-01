@@ -1,43 +1,15 @@
 {% extends "base_foot.html"%}
     {%block head%}
+	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+
+    {%endblock head%}
 	<script type="text/javascript">
+		//添加js代码进行用户登陆验证
 		$(function () {
-			name_error = false;
-			passwd_error = false;
-			$('#username').blur(function() {
-				check_user_name();
-			});
 
-			$('#pwd').blur(function() {
-				check_pwd();
-			});
-
-			function check_user_name() {
-                var user_name = $('#user_name').val();
-                //ajax获取数据库用户名进行比较
-                $.get('/user/login_handle', {'user_info': user_name}, function (data) {
-                    if (data.len == 1) {
-
-                    }
-                })
-            }
-
-			function check_pwd() {
-                var pwd = $('#pwd').val();
-                //ajax获取数据库用户名进行比较
-                $.get('/user/login_handle', {'user_info': pwd}, function (data) {
-                    if (data.len == 1) {
-
-                    }
-                });
-            }
-
-
-        })
+        });
 
 	</script>
-    {%endblock head%}
-
     {%block body%}
 	<div class="login_top clearfix">
 		<a href="index.html" class="login_logo"><img src="/static/images/logo02.png"></a>
@@ -54,6 +26,7 @@
 				</div>
 				<div class="form_input">
 					<form method="post" id="reg_form" action="/user/login_handle/">
+						{%csrf_token%}
 						<input type="text" name="username" id="username" class="name_input" placeholder="请输入用户名">
 						<div class="user_error">输入错误</div>
 						<input type="password" name="pwd" id="pwd" class="pass_input" placeholder="请输入密码">
@@ -63,7 +36,7 @@
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>
-						<input type="submit" name="" value="登录" class="input_submit">
+						<input type="button" name="click_button" id="click_button" value="登录" class="input_submit">
 					</form>
 				</div>
 			</div>
