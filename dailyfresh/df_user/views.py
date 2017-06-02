@@ -8,7 +8,9 @@ from models import *
 # Create your views here.
 
 def login(request):
-    return render(request, 'df_user/login.html')
+    uname = request.COOKIES.get('uname','')
+    context = {'title':'用户登录','error_name': 0,'error_pwd': 0,'uname':uname}
+    return render(request, 'df_user/login.html', context)
 
 def login_handle(request):
     #　接收请求信息
@@ -16,6 +18,7 @@ def login_handle(request):
     uname = post.get('username')
     upwd = post.get('pwd')
     jizhu = post.get('jizhu', 0)
+    print jizhu
     #　根据用户名查询对象
     users = User_info.objects.filter(user_name=uname)
     print users
@@ -31,7 +34,7 @@ def login_handle(request):
             #读取cookies中设置的url为根目录
             #这句话怎么理解?读取cookies,没有读取到则设置一个默认值？
             url = request.COOKIES.get('url','/')
-            print url
+
             red = HttpResponseRedirect(url)
             # 成功后删除转向地址，防止以后直接登录造成的转向
             # 为什么要删除?
@@ -39,6 +42,7 @@ def login_handle(request):
 
             #记住用户名
             if jizhu!=0:
+                print uname
                 red.set_cookie('uname', uname)
             else:
                 red.set_cookie('uname','',max_age=-1)
