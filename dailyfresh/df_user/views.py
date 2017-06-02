@@ -99,6 +99,15 @@ def register_handle(request):
     #return redirect('/user/login/')
     return JsonResponse({'redirect':'/user/login/'})
 
+def info(request):
+    return render(request, 'df_user/user_center_info.html')
+
+def order(request):
+    return render(request, 'df_user/user_center_order.html')
+
+def site(request):
+
+    return render(request, 'df_user/user_center_site.html')
 
 
 
