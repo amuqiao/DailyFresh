@@ -4,17 +4,22 @@
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
 			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>张 山</em>
-				</div>
+
+				{%if user.user_name|default:'' != ''%}
+				<!--原来样式被隐藏了-->
 				<div class="login_btn fl">
-					<a href="login.html">登录</a>
-					<span>|</span>
-					<a href="register.html">注册</a>
+					欢迎您：<em>{{user.user_name}}</em>
 				</div>
+				{%else%}
+				<div class="login_btn fl">
+					<a href="/user/login/">登录</a>
+					<span>|</span>
+					<a href="/user/register/">注册</a>
+				</div>
+				{%endif%}
 				<div class="user_link fl">
 					<span>|</span>
-					<a href="user_center_info.html">用户中心</a>
+					<a href="/user/info/">用户中心</a>
 					<span>|</span>
 					<a href="cart.html">我的购物车</a>
 					<span>|</span>
@@ -24,6 +29,30 @@
 		</div>
 	</div>
 
+	<div class="search_bar clearfix">
+		<a href="index.html" class="logo fl"><img src="images/logo.png"></a>
+		<!--传入showcart=1显示购物车,不传则不显示-->
+		{%if showcart|default:0 == 1%}
+		<div class="search_con fl">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>
+
+		<div class="guest_cart fr">
+			<a href="#" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">1</div>
+		</div>
+
+		{%else%}
+		<a href="index.html" class="logo fl"><img src="/static/images/logo.png"></a>
+		<div class="sub_showcart fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
+		<div class="search_con fr">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>
+		{%endif%}
+
+	</div>
 {%block content%}{%endblock content%}
 {%endblock body%}
 

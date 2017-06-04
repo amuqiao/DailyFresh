@@ -33,7 +33,7 @@ def login_handle(request):
 
             #读取cookies中设置的url为根目录
             #这句话怎么理解?读取cookies,没有读取到则设置一个默认值？
-            url = request.COOKIES.get('url','/')
+            url = request.COOKIES.get('url','/user/site/')
 
             red = HttpResponseRedirect(url)
             # 成功后删除转向地址，防止以后直接登录造成的转向
@@ -100,14 +100,35 @@ def register_handle(request):
     return JsonResponse({'redirect':'/user/login/'})
 
 def info(request):
-    return render(request, 'df_user/user_center_info.html')
+    user = User_info.objects.get(id=request.session['user_id'])
+    context = {'title': '用户中心',
+               'user': user,
+               }
+    return render(request, 'df_user/user_center_info.html', context)
 
 def order(request):
-    return render(request, 'df_user/user_center_order.html')
+    user = User_info.objects.get(id=request.session['user_id'])
+    context = {'title': '用户中心',
+               'user': user,
+               }
+    return render(request, 'df_user/user_center_order.html',context)
 
 def site(request):
+    #从session中保存的信息获取当前用户对象
+    user = User_info.objects.get(id=request.session['user_id'])
 
-    return render(request, 'df_user/user_center_site.html')
+
+    #如果有数据提交,获取post表单数据,这里应该在写一段js代码进行判断
+    #if request.method=='POST':
+    dict = request.POST
+    user.consignee_name = dict.get('uname')
+    user.consignee_address = dict.get('uaddress')
+    user.consignee_postcode = dict.get('upostcode')
+    user.consignee_tel = dict.get('utel')
+    user.save()
+    #从数据库读取地址信息
+    context = {'title':'用户中心', 'user':user}
+    return render(request, 'df_user/user_center_site.html', context)
 
 
 

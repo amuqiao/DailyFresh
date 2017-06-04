@@ -1,15 +1,6 @@
 {% extends 'base.html'%}
 {%block content%}
 
-	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="/static/images/logo.png"></a>
-		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
-		<div class="search_con fr">
-			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
-			<input type="button" class="input_btn fr" name="" value="搜索">
-		</div>		
-	</div>
-
 	<div class="main_con clearfix">
 		<div class="left_menu_con clearfix">
 			<h3>用户中心</h3>
@@ -23,9 +14,9 @@
 				<div class="info_con clearfix">
 				<h3 class="common_title2">基本信息</h3>
 						<ul class="user_info_list">
-							<li><span>用户名：</span>18210569700</li>
-							<li><span>联系方式：</span>18210569700</li>
-							<li><span>联系地址：</span>北京市昌平区</li>			
+							<li><span>用户名：</span>{{user.user_name}}</li>
+							<li><span>联系方式：</span>{{user.consignee_tel}}</li>
+							<li><span>联系地址：</span>{{user.consignee_address}}</li>
 						</ul>
 				</div>
 				
