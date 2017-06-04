@@ -30,9 +30,9 @@
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="images/logo.png"></a>
-		<!--传入showcart=1显示购物车,不传则不显示-->
-		{%if showcart|default:0 == 1%}
+		<a href="index.html" class="logo fl"><img src="/static/images/logo.png"></a>
+		<!--传入page_name=1显示购物车,不传则不显示-->
+		{%if page_name|default:0 == 1%}
 		<div class="search_con fl">
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
 			<input type="button" class="input_btn fr" name="" value="搜索">
@@ -44,8 +44,6 @@
 		</div>
 
 		{%else%}
-		<a href="index.html" class="logo fl"><img src="/static/images/logo.png"></a>
-		<div class="sub_showcart fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
 			<input type="button" class="input_btn fr" name="" value="搜索">

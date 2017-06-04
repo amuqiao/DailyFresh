@@ -33,12 +33,8 @@ def index(request):
 
     return render(request, 'df_goods/index.html', context)
 
-def index21(request,tid):
-    pass
-
-
 def list(request):
-    pass
+    return render(request, 'df_goods/list.html')
 
 def detail(request):
     pass
