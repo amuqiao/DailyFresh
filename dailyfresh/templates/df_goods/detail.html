@@ -1,4 +1,32 @@
 {% extends 'df_goods/base.html'%}
+{% block head%}
+<!--实现详细页商品数量加减操作,相应总价发生变化-->
+<script>
+    function calcTotal() {
+        price = parseFloat($('.show_pirze > em').text());
+        count = parseInt($('.num_show').val());
+        $('.total > em').text((price*count).toFixed(2))
+    };
+    $(function () {
+        $('.num_show').blur(function () {
+            calcTotal();
+        });
+        $('.add').click(function () {
+            $('.num_show').val(parseInt($('.num_show').val())+1);
+            calcTotal();
+        });
+        $('.minus').click(function () {
+            count = parseInt($('.num_show').val())-1;
+            if(count<=1){
+                $('.num_show').val(1);
+            }else{
+                $('.num_show').val(count);
+            }
+            calcTotal();
+        });
+    });
+</script>
+{% endblock head%}
 {% block content1%}
 	<div class="goods_detail_con clearfix">
 		<div class="goods_detail_pic fl"><img src="/static/{{goods.gpic}}"></div>
@@ -18,7 +46,7 @@
 					<a href="javascript:;" class="minus fr">-</a>	
 				</div> 
 			</div>
-			<div class="total">总价：<em>16.80元</em></div>
+			<div class="total">总价：<em>{{goods.gprice}}</em>元</div>
 			<div class="operate_btn">
 				<a href="javascript:;" class="buy_btn">立即购买</a>
 				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>				
