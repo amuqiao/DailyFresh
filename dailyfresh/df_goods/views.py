@@ -67,13 +67,18 @@ def list(request, tid, pindex, orderby):
     page = paginator.page(pindex2)
 
     # 构造上下文
-    context = {'title':'列表页', 'page':page,
+    context = {'title':'列表页', 'page_name':'page_list',
+               'page':page,
         'tid':tid, 'gtype':gtype,
         'orderby':orderby, 'new_list':new_list,
     }
     return render(request, 'df_goods/list.html', context)
+
 def detail(request):
-    pass
+    context = {
+        'titie':'商品详细页','page_name':'page_detail',
+    }
+    return render(request, 'df_goods/detail.html',context)
 
 
 

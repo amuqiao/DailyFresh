@@ -8,5 +8,5 @@ urlpatterns=[
     #传入三个参数：分类 页码　排序类型
     url(r'^list(\d+)_(\d+)_(\d+)/$', views.list),
 
-    #url(r'^detail/$', views.detail),
+    url(r'^detail/$', views.detail),
 ]

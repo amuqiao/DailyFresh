@@ -1,1 +1,67 @@
 {% extends 'base.html'%}
+<!--将整个页面分成上左右三大部分-->
+
+{% block content%}
+<!--商品分类内容-->
+    <div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+					<li><a href="/list1_1_1/" class="fruit">新鲜水果</a></li>
+					<li><a href="/list2_1_1/" class="seafood">海鲜水产</a></li>
+					<li><a href="/list3_1_1/" class="meet">猪牛羊肉</a></li>
+					<li><a href="/list4_1_1/" class="egg">禽类蛋品</a></li>
+					<li><a href="/list5_1_1/" class="vegetables">新鲜蔬菜</a></li>
+					<li><a href="/list6_1_1/" class="ice">速冻食品</a></li>
+				</ul>
+			</div>
+			<ul class="navlist fl">
+				<li><a href="">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+	{%if page_name == 'page_list' %}
+	<div class="breadcrumb">
+		<a href="#">全部分类</a>
+		<span>></span>
+		<a href="#">新鲜水果</a>
+	</div>
+	{% elif page_name == 'page_detail' %}
+	<div class="breadcrumb">
+		<a href="#">全部分类</a>
+		<span>></span>
+		<a href="#">新鲜水果</a>
+		<span>></span>
+		<a href="#">商品详情</a>
+	</div>
+	{% endif %}
+
+{% block content1%}{% endblock content1%}
+
+    <div class="main_wrap clearfix">
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+					{% for i in new_list%}
+					<li>
+						<a href="#"><img src="/static/{{i.gpic}}"></a>
+						<h4><a href="#">{{i.gtitle}}</a></h4>
+						<div class="prize">￥{{i.gprice}}</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+{% block content2%}{% endblock content2%}
+
+{% endblock content%}
+
+
