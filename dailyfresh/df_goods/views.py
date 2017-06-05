@@ -1,6 +1,9 @@
 # coding=utf-8
+from django.http import HttpResponse
 from django.shortcuts import render
+
 from models import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
@@ -32,11 +35,46 @@ def index(request):
     }
 
     return render(request, 'df_goods/index.html', context)
+#传入三个参数：分类 页码　排序类型
+def list(request, tid, pindex, orderby):
 
-def list(request):
-    return render(request, 'df_goods/list.html')
+    #根据tid查询所有商品信息->根据order进行排序->根据pindex显示第几页
+    #根据传入的pid查询商品类型
+    gtype = TypeInfo.objects.get(id = tid)
+    #查询最新两条商品信息 一对多查询
+    new_list = gtype.goodsinfo_set.order_by('-id')[0:2]
+    #查询该类型所有商品
+    #goods_list = gtype.goodsinfo_set.all()
+    goods_list = GoodsInfo.objects.filter(gtype_id = int(tid))
+    #排序  默认(上架时间)　价格　人气　
+    if orderby == '1':
+        goods_list = goods_list.order_by('-id')
+    elif orderby == '2':
+        goods_list = goods_list.order_by('-gprice')
+    elif orderby == '3':
+        goods_list = goods_list.order_by('-gclick')
 
+    # 分页->显示  每页10条数据
+    paginator = Paginator(goods_list, 3)
+    pindex2 = int(pindex)
+    # 对页码范围进行限制
+    if pindex2 <= 0:
+        pindex2 = 1
+    elif pindex2 >= paginator.num_pages:
+        pindex2 = paginator.num_pages
+
+    # 显示当前页面所有数据
+    page = paginator.page(pindex2)
+
+    # 构造上下文
+    context = {'title':'列表页', 'page':page,
+        'tid':tid, 'gtype':gtype,
+        'orderby':orderby, 'new_list':new_list,
+    }
+    return render(request, 'df_goods/list.html', context)
 def detail(request):
     pass
+
+
 
 

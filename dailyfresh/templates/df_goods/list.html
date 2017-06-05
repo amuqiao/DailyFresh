@@ -3,15 +3,15 @@
 	<div class="navbar_con">
 		<div class="navbar clearfix">
 			<div class="subnav_con fl">
-				<h1>全部商品分类</h1>	
-				<span></span>			
+				<h1>全部商品分类</h1>
+				<span></span>
 				<ul class="subnav">
-					<li><a href="#" class="fruit">新鲜水果</a></li>
-					<li><a href="#" class="seafood">海鲜水产</a></li>
-					<li><a href="#" class="meet">猪牛羊肉</a></li>
-					<li><a href="#" class="egg">禽类蛋品</a></li>
-					<li><a href="#" class="vegetables">新鲜蔬菜</a></li>
-					<li><a href="#" class="ice">速冻食品</a></li>
+					<li><a href="/list1_1_1/" class="fruit">新鲜水果</a></li>
+					<li><a href="/list2_1_1/" class="seafood">海鲜水产</a></li>
+					<li><a href="/list3_1_1/" class="meet">猪牛羊肉</a></li>
+					<li><a href="/list4_1_1/" class="egg">禽类蛋品</a></li>
+					<li><a href="/list5_1_1/" class="vegetables">新鲜蔬菜</a></li>
+					<li><a href="/list6_1_1/" class="ice">速冻食品</a></li>
 				</ul>
 			</div>
 			<ul class="navlist fl">
@@ -35,174 +35,107 @@
 			<div class="new_goods">
 				<h3>新品推荐</h3>
 				<ul>
+					{% for i in new_list%}
 					<li>
-						<a href="#"><img src="/static/images/goods/goods001.jpg"></a>
-						<h4><a href="#">进口柠檬</a></h4>
-						<div class="prize">￥3.90</div>
+						<a href="#"><img src="/static/{{i.gpic}}"></a>
+						<h4><a href="#">{{i.gtitle}}</a></h4>
+						<div class="prize">￥{{i.gprice}}</div>
 					</li>
-					<li>
-						<a href="#"><img src="/static/images/goods/goods002.jpg"></a>
-						<h4><a href="#">玫瑰香葡萄</a></h4>
-						<div class="prize">￥16.80</div>
-					</li>
+					{% endfor %}
 				</ul>
 			</div>
 		</div>
 
 		<div class="r_wrap fr clearfix">
+			<!--默认　价格　人气-->
 			<div class="sort_bar">
-				<a href="#" class="active">默认</a>
-				<a href="#">价格</a>
-				<a href="#">人气</a>
+				<a href="#" {%if orderby = 1%}class='active'{%endif%}>默认</a>
+				<a href="#" {%if orderby = 2%}class='active'{%endif%}>价格</a>
+				<a href="#" {%if orderby = 3%}class='active'{%endif%}>人气</a>
 			</div>
-
+			<!--显示推荐新品-->
 			<ul class="goods_type_list clearfix">
+				{%for i in page%}
 				<li>
-					<a href="detail.html"><img src="/static/images/goods/goods003.jpg"></a>
-					<h4><a href="detail.html">大兴大棚草莓</a></h4>
+					<a href="detail.html"><img src="/static/{{i.gpic}}"></a>
+					<h4><a href="detail.html">{{i.gtitle}}</a></h4>
 					<div class="operate">
-						<span class="prize">￥16.80</span>
-						<span class="unit">16.80/500g</span>
+						<span class="prize">￥{{i.gprice}}</span>
+						<span class="unit">{{i.gprice}}/{{i.gunite}}</span>
 						<a href="#" class="add_goods" title="加入购物车"></a>
 					</div>
 				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods004.jpg"></a>
-					<h4><a href="#">吐鲁番梨光杏</a></h4>
-					<div class="operate">
-						<span class="prize">￥5.50</span>
-						<span class="unit">5.50/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods005.jpg"></a>
-					<h4><a href="#">黄肉桃</a></h4>
-					<div class="operate">
-						<span class="prize">￥10.00</span>
-						<span class="unit">10.00/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods006.jpg"></a>
-					<h4><a href="#">进口西梅</a></h4>
-					<div class="operate">
-						<span class="prize">￥28.80</span>
-						<span class="unit">28.8/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods007.jpg"></a>
-					<h4><a href="#">香梨</a></h4>
-					<div class="operate">
-						<span class="prize">￥6.45</span>
-						<span class="unit">6.45/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods008.jpg"></a>
-					<h4><a href="#">栗子</a></h4>
-					<div class="operate">
-						<span class="prize">￥9.50</span>
-						<span class="unit">9.50/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods009.jpg"></a>
-					<h4><a href="#">海南香蕉</a></h4>
-					<div class="operate">
-						<span class="prize">￥3.30</span>
-						<span class="unit">3.30/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods010.jpg"></a>
-					<h4><a href="#">青苹果</a></h4>
-					<div class="operate">
-						<span class="prize">￥5.00</span>
-						<span class="unit">5.00/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods011.jpg"></a>
-					<h4><a href="#">山莓</a></h4>
-					<div class="operate">
-						<span class="prize">￥28.80</span>
-						<span class="unit">28.8/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-
-				<li>
-					<a href="#"><img src="/static/images/goods/goods012.jpg"></a>
-					<h4><a href="#">奇异果</a></h4>
-					<div class="operate">
-						<span class="prize">￥25.80</span>
-						<span class="unit">25.8/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-				<li>
-					<a href="#"><img src="/static/images/goods/goods013.jpg"></a>
-					<h4><a href="#">蜜桔</a></h4>
-					<div class="operate">
-						<span class="prize">￥4.80</span>
-						<span class="unit">4.8/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-				<li>
-					<a href="#"><img src="/static/images/goods/goods014.jpg"></a>
-					<h4><a href="#">脐橙</a></h4>
-					<div class="operate">
-						<span class="prize">￥3.50</span>
-						<span class="unit">3.50/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-				<li>
-					<a href="#"><img src="/static/images/goods/goods001.jpg"></a>
-					<h4><a href="#">进口柠檬</a></h4>
-					<div class="operate">
-						<span class="prize">￥3.90</span>
-						<span class="unit">3.90/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
-				<li>
-					<a href="#"><img src="/static/images/goods/goods002.jpg"></a>
-					<h4><a href="#">玫瑰香葡萄</a></h4>
-					<div class="operate">
-						<span class="prize">￥16.80</span>
-						<span class="unit">16.80/500g</span>
-						<a href="#" class="add_goods" title="加入购物车"></a>
-					</div>
-				</li>
+				{%endfor%}
 			</ul>
-
+			<!--显示页码数-->
 			<div class="pagenation">
-				<a href="#"><上一页</a>
-				<a href="#" class="active">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-				<a href="#">下一页></a>
+
+				<!--判断是否有上一页-->
+				{% if page.has_previous %}
+				<a href="/list{{tid}}_1_{{ orderby }}/">首页</a>
+				<a href="/list{{tid}}_{{page.number|add:-1}}_{{ orderby }}/">上一页</a>
+				{%endif%}
+
+				<!--当页码<=5页时：-->
+				{% if page.paginator.num_pages <= 5 %}
+					<!--遍历页码列表,非num_pages-->
+					{% for index in page.paginator.page_range%}
+						{% if index == page.number %}
+							<a href="#" class="active">{{index}}</a>
+						{% else %}
+							<a href="/list{{ tid }}_{{ index }}_{{ orderby }}/">{{index}}</a>
+						{% endif %}
+					{% endfor %}
+				{% else %}
+<!--当页码>5页时：-->
+<!--当前页为第一页时-->
+{% if page.number == 1 %}
+	<a href="#" class="active">1</a>
+	<a href="/list{{tid}}_2_{{orderby}}/">2</a>
+	<a href="/list{{tid}}_3_{{orderby}}/">3</a>
+	<a href="/list{{tid}}_4_{{orderby}}/">4</a>
+	<a href="/list{{tid}}_5_{{orderby}}/">5</a>
+<!--当前页为第二页时-->
+{% elif page.number == 2%}
+	<a href="/list{{tid}}_1_{{orderby}}/" >1</a>
+	<a href="#" class="active">2</a>
+	<a href="/list{{tid}}_3_{{orderby}}/">3</a>
+	<a href="/list{{tid}}_4_{{orderby}}/">4</a>
+	<a href="/list{{tid}}_5_{{orderby}}/">5</a>
+<!--当前页为倒数第二页时-->
+{% elif page.number == page.pagintor.num_pages|add:-1%}
+	<a href="/list{{tid}}_{{page.number|add:-3}}_{{orderby}}/" >{{page.number|add:-3}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-2}}_{{orderby}}/" >{{page.number|add:-2}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-1}}_{{orderby}}/" >{{page.number|add:-1}}</a>
+	<a href="/list{{tid}}_{{page.number}}_{{orderby}}/" class="active">{{page.number}}</a>
+	<a href="/list{{tid}}_{{page.number|add:1}}_{{orderby}}/" >{{page.number|add:1}}</a>
+<!--当前页为倒数第一页时-->
+{% elif page.number == page.pagintor.num_pages}
+	<a href="/list{{tid}}_{{page.number|add:-4}}_{{orderby}}/" >{{page.number|add:-4}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-3}}_{{orderby}}/" >{{page.number|add:-3}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-2}}_{{orderby}}/" >{{page.number|add:-2}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-1}}_{{orderby}}/" >{{page.number|add:-1}}</a>
+	<a href="/list{{tid}}_{{page.number}}_{{orderby}}/" class="active">{{page.number}}</a>
+<!--其他情况-->
+{% else %}
+	<a href="/list{{tid}}_{{page.number|add:-2}}_{{orderby}}/" >{{page.number|add:-2}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-1}}_{{orderby}}/" >{{page.number|add:-1}}</a>
+	<a href="/list{{tid}}_{{page.number}}_{{orderby}}/" class="active">{{page.number}}</a>
+	<a href="/list{{tid}}_{{page.number|add:1}}_{{orderby}}/" >{{page.number|add:1}}</a>
+	<a href="/list{{tid}}_{{page.number|add:2}}_{{orderby}}/" >{{page.number|add:2}}</a>
+
+{% endif %}
+
+				{% endif %}
+				<!--判断是否有下一页-->
+				{%if page.has_next%}
+					<a href="/list{{tid}}_{{page.number|add:1}}_{{ orderby }}/">下一页</a>
+					<a href="/list{{tid}}_{{page.paginator.num_pages}}_{{ orderby }}/">末页</a>
+				{%endif%}
+
 			</div>
+
+
 		</div>
 	</div>
 {% endblock content %}
