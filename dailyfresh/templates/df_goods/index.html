@@ -71,7 +71,7 @@
 				<span>|</span>
 				<!--循环添加热销商品-->
 				{%for g in t_clicklist0%}
-				<a href="/#/">{{g.gtitle|slice:'5'}}...</a>
+				<a href="/{{g.id}}/">{{g.gtitle|slice:'5'}}...</a>
 				{%endfor%}
 			</div>
 			<a href="/list1_1_1/" class="goods_more fr" id="fruit_more">查看更多 ></a>
@@ -83,8 +83,8 @@
 				<!--循环添加新上架商品-->
 				{%for g in t_newlist0%}
 				<li>
-					<h4><a href="#">{{g.gtitle}}</a></h4>
-					<a href="#"><img src="/static/{{g.gpic}}"></a>
+					<h4><a href="/{{g.id}}/">{{g.gtitle}}</a></h4>
+					<a href="/{{g.id}}/"><img src="/static/{{g.gpic}}"></a>
 					<div class="prize">¥ {{g.gprice}}</div>
 				</li>
 				{%endfor%}
@@ -99,7 +99,7 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{%for g in t_clicklist1%}
-				<a href="#">{{g.gtitle|slice:'5'}}...</a>
+				<a href="/{{g.id}}/">{{g.gtitle|slice:'5'}}...</a>
 				{%endfor%}
 			</div>
 			<a href="/list2_1_1/" class="goods_more fr">查看更多 ></a>
@@ -110,8 +110,8 @@
 			<ul class="goods_list fl">
 				{%for g in t_newlist1%}
 				<li>
-					<h4><a href="#">{{g.gtitle}}</a></h4>
-					<a href="#"><img src="/static/{{g.gpic}}"></a>
+					<h4><a href="/{{g.id}}/">{{g.gtitle}}</a></h4>
+					<a href="/{{g.id}}/"><img src="/static/{{g.gpic}}"></a>
 					<div class="prize">¥ {{g.gprice}}</div>
 				</li>
 				{%endfor%}
@@ -125,7 +125,7 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{%for g in t_clicklist2%}
-				<a href="#">{{g.gtitle|slice:'5'}}...</a>
+				<a href="/{{g.id}}/">{{g.gtitle|slice:'5'}}...</a>
 				{%endfor%}
 			</div>
 			<a href="/list3_1_1/" class="goods_more fr">查看更多 ></a>
@@ -136,8 +136,8 @@
 			<ul class="goods_list fl">
 				{%for g in t_newlist2%}
 				<li>
-					<h4><a href="#">{{g.gtitle}}</a></h4>
-					<a href="#"><img src="/static/{{g.gpic}}"></a>
+					<h4><a href="/{{g.id}}/">{{g.gtitle}}</a></h4>
+					<a href="/{{g.id}}/"><img src="/static/{{g.gpic}}"></a>
 					<div class="prize">¥ {{g.gprice}}</div>
 				</li>
 				{%endfor%}
@@ -151,7 +151,7 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{%for g in t_clicklist3%}
-				<a href="#">{{g.gtitle|slice:'5'}}...</a>
+				<a href="/{{g.id}}/">{{g.gtitle|slice:'5'}}...</a>
 				{%endfor%}
 			</div>
 			<a href="/list4_1_1/" class="goods_more fr">查看更多 ></a>
@@ -162,8 +162,8 @@
 			<ul class="goods_list fl">
 				{%for g in t_newlist3%}
 				<li>
-					<h4><a href="#">{{g.gtitle}}</a></h4>
-					<a href="#"><img src="/static/{{g.gpic}}"></a>
+					<h4><a href="/{{g.id}}/">{{g.gtitle}}</a></h4>
+					<a href="/{{g.id}}/"><img src="/static/{{g.gpic}}"></a>
 					<div class="prize">¥ {{g.gprice}}</div>
 				</li>
 				{%endfor%}
@@ -177,7 +177,7 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{%for g in t_clicklist4%}
-				<a href="#">{{g.gtitle|slice:'5'}}...</a>
+				<a href="/{{g.id}}/">{{g.gtitle|slice:'5'}}...</a>
 				{%endfor%}
 			</div>
 			<a href="/list5_1_1/" class="goods_more fr">查看更多 ></a>
@@ -188,8 +188,8 @@
 			<ul class="goods_list fl">
 				{%for g in t_newlist4%}
 				<li>
-					<h4><a href="#">{{g.gtitle}}</a></h4>
-					<a href="#"><img src="/static/{{g.gpic}}"></a>
+					<h4><a href="/{{g.id}}/">{{g.gtitle}}</a></h4>
+					<a href="/{{g.id}}/"><img src="/static/{{g.gpic}}"></a>
 					<div class="prize">¥ {{g.gprice}}</div>
 				</li>
 				{%endfor%}
@@ -203,7 +203,7 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{%for g in t_clicklist5%}
-				<a href="#">{{g.gtitle|slice:'5'}}...</a>
+				<a href="/{{g.id}}/">{{g.gtitle|slice:'5'}}...</a>
 				{%endfor%}
 			</div>
 			<a href="/list6_1_1/" class="goods_more fr">查看更多 ></a>
@@ -214,8 +214,8 @@
 			<ul class="goods_list fl">
 			{%for g in t_newlist5%}
 				<li>
-					<h4><a href="#">{{g.gtitle}}</a></h4>
-					<a href="#"><img src="/static/{{g.gpic}}"></a>
+					<h4><a href="/{{g.id}}/">{{g.gtitle}}</a></h4>
+					<a href="/{{g.id}}/"><img src="/static/{{g.gpic}}"></a>
 					<div class="prize">¥ {{g.gprice}}</div>
 				</li>
 				{%endfor%}

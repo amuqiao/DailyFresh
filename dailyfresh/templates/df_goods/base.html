@@ -49,19 +49,19 @@
 			<div class="new_goods">
 				<h3>新品推荐</h3>
 				<ul>
-					{% for i in new_list%}
+					{% for goods in new_list%}
 					<li>
-						<a href="#"><img src="/static/{{i.gpic}}"></a>
-						<h4><a href="#">{{i.gtitle}}</a></h4>
-						<div class="prize">￥{{i.gprice}}</div>
+						<a href="/{{goods.id}}/"><img src="/static/{{goods.gpic}}"></a>
+						<h4><a href="/{{goods.id}}/">{{goods.gtitle}}</a></h4>
+						<div class="prize">￥{{goods.gprice}}</div>
 					</li>
 					{% endfor %}
 				</ul>
 			</div>
 		</div>
 
-{% block content2%}{% endblock content2%}
-
+	{% block content2%}{% endblock content2%}
+	</div>
 {% endblock content%}
 
 
