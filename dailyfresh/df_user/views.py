@@ -2,8 +2,8 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse,HttpResponseRedirect
 from hashlib import sha1
-
 from models import *
+from df_goods.models import *
 
 # Create your views here.
 
@@ -101,8 +101,18 @@ def register_handle(request):
 
 def info(request):
     user = User_info.objects.get(id=request.session['user_id'])
+    history_list = []
+    history = request.COOKIES.get('history','')
+    if history != '':
+        # 将字符串拆分成列表
+        history1 = history.split(',')
+        for goods_id in history1:
+            history_list.append(GoodsInfo.objects.get(id=int(goods_id)))
+
+
     context = {'title': '用户中心',
                'user': user,
+               'history_list':history_list,
                }
     return render(request, 'df_user/user_center_info.html', context)
 

@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.shortcuts import render
-
+from django.http import JsonResponse
 from models import *
 from django.core.paginator import Paginator
 
@@ -88,7 +88,31 @@ def detail(request, gid):
         'titie':'商品详细页','page_name':'page_detail',
         'new_list':new_list, 'goods':goods,
     }
-    return render(request, 'df_goods/detail.html',context)
+    response = render(request, 'df_goods/detail.html', context)
+    # 最近浏览,如果不存在则返回默认值为空
+    history = request.COOKIES.get('history','')
+    # 历史记录cookies为空,则将id保存到cookie中
+    if history == '':
+        response.set_cookie('history',gid)
+    else:
+        # {键:(value1,value2,...)} 存储形式是字符串?
+        history_list = history.split(',')
+        #　存在该记录则删除
+        if gid in history_list:
+            history_list.remove(gid)
+        # 将记录添加到表头
+        history_list.insert(0,gid)
+        # 浏览记录不<=5
+        if len(history_list) > 5:
+            history_list.pop()
+        # 将列表拼接回字符串
+        history_list2 = ','.join(history_list)
+        response.set_cookie('history',history_list2)
+    return response
+
+
+
+
 
 
 
