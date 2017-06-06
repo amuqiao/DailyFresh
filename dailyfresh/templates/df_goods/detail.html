@@ -88,7 +88,12 @@
 				'top': $to_x+7},
 				"fast", function() {
 					$(".add_jump").fadeOut('fast',function(){
-						$('#show_count').html(2);
+					    //动画效果结束后,进行添加操作
+                        //ajax方式去请求数据
+                        $.get('/cart/add{{goods.id}}_'+$('.num_show').val()+'/',function (data) {
+                            $('#show_count').html({{data.count}});
+                        });
+
 					});
 
 			});

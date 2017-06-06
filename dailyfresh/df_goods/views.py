@@ -1,7 +1,8 @@
 # coding=utf-8
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from models import *
+from df_cart.models import *
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -24,7 +25,7 @@ def index(request):
         t_clicklist.append(typelist[item].goodsinfo_set.order_by('-gclick')[0:3])
         t_newlist.append(typelist[item].goodsinfo_set.order_by('-id')[0:4])
     context = {
-        'title':'首页','showcart':1,
+        'title':'首页','page_name':1,'cart_count':cart_count(request),
         't_clicklist0':t_clicklist[0], 't_newlist0':t_newlist[0],
         't_clicklist1':t_clicklist[1], 't_newlist1':t_newlist[1],
         't_clicklist2':t_clicklist[2], 't_newlist2':t_newlist[2],
@@ -66,13 +67,12 @@ def list(request, tid, pindex, orderby):
     page = paginator.page(pindex2)
 
     # 构造上下文
-    context = {'title':'列表页', 'page_name':'page_list',
-               'page':page,
+    context = {'title':'列表页', 'page_name':1,
+               'page':page,'cart_count':cart_count(request),
         'tid':tid, 'gtype':gtype,
         'orderby':orderby, 'new_list':new_list,
     }
     return render(request, 'df_goods/list.html', context)
-
 
 #当通过list()将商品列表显示出来的时候,可以在图片链接处将商品id传入其中,
 # 通过该链接跳转到商品详细页,根据不同的id在页面上呈现不同的内容
@@ -84,8 +84,8 @@ def detail(request, gid):
 
     # 查询最新两条商品信息 一对多查询
     new_list = goods.gtype.goodsinfo_set.order_by('-id')[0:2]
-    context = {
-        'titie':'商品详细页','page_name':'page_detail',
+    context = {'cart_count':cart_count(request),
+        'titie':'商品详细页','page_name':1,
         'new_list':new_list, 'goods':goods,
     }
     response = render(request, 'df_goods/detail.html', context)
@@ -110,7 +110,12 @@ def detail(request, gid):
         response.set_cookie('history',history_list2)
     return response
 
-
+def cart_count(request):
+    if request.session.has_key('user_id'):
+        count = CartInfo.objects.filter(user_id=request.session['user_id']).count()
+        return count
+    else:
+        return 0
 
 
 
