@@ -28,7 +28,17 @@ def add(request, gid, count):
     else:
         return redirect('/cart/')
 
+def count_change(request):
+    id = request.GET.get('id')
+    count = request.GET.get('count')
+    cart = CartInfo.objects.get(id=int(id))
+    cart.count = int(count)
+    cart.save()
+    return JsonResponse({'count': cart.count})
+
 def list(request):
-    context = {'title':'购物车',
+    cart_list = CartInfo.objects.filter(user_id=request.session['user_id'])
+    context = {'title': '购物车','page_name': 1,
+               'cart_list': cart_list,
                }
     return render(request, 'df_cart/cart.html',context)
