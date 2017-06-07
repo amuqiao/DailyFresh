@@ -59,23 +59,29 @@
             $(this).prev().val(count).blur();
             cacl_total();
         });
-        //直接修改商品数量
+        //通过直接修改文本框数值来修改商品数量
         $('.num_show').blur(function () {
+            //获取文本框数值(表示商品计数)
             count = parseInt($(this).val());
             //判断库存量
             //kucun = $(this).find('.col03').children('em').text();
+            //获取库存量
             kucun = $(this).parents('.col06').prevAll('.col03').children('em').text();
+            //判断商品计数不能大于库存量
             if(count > kucun ){
                 count = kucun;
             }
+            //判断商品计数不能小于１
             if(count <= 1){
                 count = 1;
             }
-            //ajax提交数据 id　商品数量
+            //提交商品数量修改信息
+            input_count = $(this);
             id = $(this).parents('.col06').prevAll('input').val();
             $.get('/cart/count_change/',{'id':id,'count':count},function (data) {
-//                $(this).val(data.count);
+                input_count.val(data.count);
             });
+            //计算页面数据
             cacl_total();
         });
     };
@@ -87,10 +93,6 @@
         //添加商品数量修改功能,并实时同步到数据库
         count_change();
     });
-
-
-
-
 
 </script>
 {% endblock head%}

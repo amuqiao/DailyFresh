@@ -34,6 +34,7 @@ def count_change(request):
     cart = CartInfo.objects.get(id=int(id))
     cart.count = int(count)
     cart.save()
+    #　如果操作失败,返回数据库中count值
     return JsonResponse({'count': cart.count})
 
 def list(request):
