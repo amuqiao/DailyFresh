@@ -43,3 +43,18 @@ def list(request):
                'cart_list': cart_list,
                }
     return render(request, 'df_cart/cart.html',context)
+
+def order(request):
+    user = User_info.objects.get(id=request.session['user_id'])
+    # 获取name='cart_id'可以获取他的value值
+    # form 表单提交被勾选的部分
+    cart_ids = request.GET.getlist('cart_id')
+    carts_list = CartInfo.objects.filter(id__in=cart_ids)
+
+    context = {'title':'订单页',
+               'user_address':user.consignee_address,
+               'user_name':user.consignee_name,
+               'user_tel':user.consignee_tel,
+               'carts_list':carts_list,
+    }
+    return render(request, 'df_order/place_order.html', context)

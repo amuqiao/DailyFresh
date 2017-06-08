@@ -1,8 +1,31 @@
 {% extends 'base.html'%}
 {% block head %}
 <script>
+	function cacl_total() {
+        //统计商品件数
+        count=$('.goods_list_td').length;
+        $('.total_goods_count em').text(count);
+        //总金额　实付款
+		sum = 0;
+        total = 0;
+        $('.goods_list_td').each(function () {
+            price = parseFloat($(this).children('.col05').text());
+			count = parseInt($(this).children('.col06').text());
+			sum = count*price;
+            $(this).children('.col07').text(sum.toFixed(2)+'元');
+			total += sum;
+            })
+        $('.total_goods_count b').text(total.toFixed(2));
+        $('.total_pay b').text((total+10).toFixed(2));
+
+        };
+
+	$(function () {
+	    cacl_total();
+    });
 
 </script>
+
 {% endblock head%}
 {% block content %}
 	<h3 class="common_title">确认收货地址</h3>
@@ -33,13 +56,22 @@
 	<h3 class="common_title">商品列表</h3>
 	
 	<div class="common_list_con clearfix">
-		{% for cart in carts_list %}
 		<ul class="goods_list_th clearfix">
-			<li class="col01"><img src="/static/{{cart.goods.gpic}}">{{cart.goods.gtitle}}</li>
-			<li class="col02">{{cart.goods.gunit}}</li>
-			<li class="col03">{{cart.goods.gprice}}</li>
+			<li class="col01">商品名称</li>
+			<li class="col02">商品单位</li>
+			<li class="col03">商品价格</li>
 			<li class="col04">数量</li>
 			<li class="col05">小计</li>
+		</ul>
+		{% for cart in carts_list %}
+		<ul class="goods_list_td clearfix">
+			<li class="col01"><input type="hidden" name="cart_id" value="{{ cart.id }}"/>{{forloop.counter}}</li>
+			<li class="col02"><img src="/static/{{cart.goods.gpic}}"></li>
+			<li class="col03">{{cart.goods.gtitle|truncatechars:10}}</li>
+			<li class="col04">{{cart.goods.gunit}}</li>
+			<li class="col05">{{cart.goods.gprice}}</li>
+			<li class="col06">{{cart.count}}</li>
+			<li class="col07">元</li>
 		</ul>
 		{% endfor %}
 	</div>
@@ -65,7 +97,6 @@
 		
 		<div class="mask"></div>
 	</div>
-	<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
 	<script type="text/javascript">
 		$('#order_btn').click(function() {
 			localStorage.setItem('order_finish',2);

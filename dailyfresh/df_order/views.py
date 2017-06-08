@@ -16,8 +16,5 @@ def order(request):
                'user_name':user.consignee_name,
                'user_tel':user.consignee_tel,
                'carts_list':carts_list,
-
-
-
     }
     return render(request, 'df_order/place_order.html', context)
