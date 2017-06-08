@@ -3,7 +3,8 @@
 <script>
     function cacl_total() {
         //统计商品件数
-        count=$('.cart_list_td').length;
+        count = $(':checked').not('#check_all').length
+        //count=$('.cart_list_td').length;
         $('.total_count em').text(count);
         $('.settlements .col03 b').text(count);
 

@@ -39,7 +39,7 @@ def count_change(request):
 
 def list(request):
     cart_list = CartInfo.objects.filter(user_id=request.session['user_id'])
-    context = {'title': '购物车','page_name': 1,
+    context = {'title': '购物车',
                'cart_list': cart_list,
                }
     return render(request, 'df_cart/cart.html',context)
