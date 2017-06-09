@@ -4,6 +4,7 @@ from django.http import JsonResponse,HttpResponse
 from models import *
 from df_cart.models import *
 from django.core.paginator import Paginator
+import df_user.user_decorator
 
 # Create your views here.
 def index(request):
@@ -85,8 +86,8 @@ def detail(request, gid):
     # 查询最新两条商品信息 一对多查询
     new_list = goods.gtype.goodsinfo_set.order_by('-id')[0:2]
     context = {'cart_count':cart_count(request),
-        'titie':'商品详细页','page_name':1,
-        'new_list':new_list, 'goods':goods,
+               'titie':'商品详细页','page_name':1,
+               'new_list':new_list, 'goods':goods,
     }
     response = render(request, 'df_goods/detail.html', context)
     # 最近浏览,如果不存在则返回默认值为空

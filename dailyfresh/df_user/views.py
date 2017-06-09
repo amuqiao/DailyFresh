@@ -4,6 +4,9 @@ from django.http import JsonResponse,HttpResponseRedirect
 from hashlib import sha1
 from models import *
 from df_goods.models import *
+from df_order.models import *
+from django.core.paginator import Paginator,Page
+import user_decorator
 
 # Create your views here.
 
@@ -58,13 +61,6 @@ def login_handle(request):
         return render(request,'df_user/login.html',context)
 
 
-
-
-
-
-
-
-
 def register(request):
     context = {'title':'天天生鲜-注册'}
     return render(request, 'df_user/register.html', context)
@@ -99,6 +95,11 @@ def register_handle(request):
     #return redirect('/user/login/')
     return JsonResponse({'redirect':'/user/login/'})
 
+def logout(request):
+    request.session.flush()
+    return redirect('/')
+
+@user_decorator.login
 def info(request):
     user = User_info.objects.get(id=request.session['user_id'])
     history_list = []
@@ -109,20 +110,28 @@ def info(request):
         for goods_id in history1:
             history_list.append(GoodsInfo.objects.get(id=int(goods_id)))
 
-
     context = {'title': '用户中心',
                'user': user,
                'history_list':history_list,
                }
     return render(request, 'df_user/user_center_info.html', context)
 
-def order(request):
-    user = User_info.objects.get(id=request.session['user_id'])
+@user_decorator.login
+def order(request,pindex):
+    order_list=OrderInfo.objects.filter(user_id=request.session['user_id']).order_by('-oid')
+    paginator = Paginator(order_list,2)
+    if pindex == '':
+        pindex = '1'
+    page = paginator.page(int(pindex))
+
     context = {'title': '用户中心',
-               'user': user,
+               'page_name':1,
+               'paginator':paginator,
+               'page':page,
                }
     return render(request, 'df_user/user_center_order.html',context)
 
+@user_decorator.login
 def site(request):
     #从session中保存的信息获取当前用户对象
     user = User_info.objects.get(id=request.session['user_id'])
@@ -137,7 +146,9 @@ def site(request):
     user.consignee_tel = dict.get('utel')
     user.save()
     #从数据库读取地址信息
-    context = {'title':'用户中心', 'user':user}
+    context = {'title':'用户中心',
+               'user':user,
+               }
     return render(request, 'df_user/user_center_site.html', context)
 
 

@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^register_exist/$', views.register_exist),
     url(r'^register_handle/$', views.register_handle),
     url(r'^info/$', views.info),
-    url(r'^order/$', views.order),
+    url(r'^order(\d*)/$', views.order),
     url(r'^site/$', views.site),
-
+    url(r'logout/$', views.logout),
 ]

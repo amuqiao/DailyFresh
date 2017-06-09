@@ -3,6 +3,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse,JsonResponse
 from models import *
+import df_user.user_decorator
 
 # Create your views here.
 
@@ -37,9 +38,11 @@ def count_change(request):
     #　如果操作失败,返回数据库中count值
     return JsonResponse({'count': cart.count})
 
+@df_user.user_decorator.login
 def list(request):
     cart_list = CartInfo.objects.filter(user_id=request.session['user_id'])
     context = {'title': '购物车',
+               'user_name': request.session['user_id'],
                'cart_list': cart_list,
                }
     return render(request, 'df_cart/cart.html',context)
@@ -53,7 +56,7 @@ def order(request):
 
     context = {'title':'订单页',
                'user_address':user.consignee_address,
-               'user_name':user.consignee_name,
+               'consignee_name':user.consignee_name,
                'user_tel':user.consignee_tel,
                'carts_list':carts_list,
     }
