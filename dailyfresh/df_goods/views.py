@@ -118,6 +118,9 @@ def cart_count(request):
     else:
         return 0
 
+def query(request):
+    pass
+
 
 
 

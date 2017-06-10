@@ -1,0 +1,102 @@
+{% extends 'df_goods/base.html'%}
+
+
+<!--{%for pindex in page.paginator.page_range%}
+    {%if pindex == page.number%}
+        {{pindex}}&nbsp;&nbsp;
+    {%else%}
+        <a href="?q={{query}}&amp;page={{pindex}}">{{pindex}}</a>&nbsp;&nbsp;
+    {%endif%}
+{%endfor%}-->
+{% block content%}
+<div class="main_wrap clearfix">
+{% block content2 %}
+
+			<div>搜索&nbsp;<b>{{query}}</b>&nbsp;结果如下：</div>
+			<!--显示推荐新品-->
+			<ul class="goods_type_list clearfix">
+				{%for item in page%}
+				<li>
+					<a href="/{{item.object.id}}/"><img src="/static/{{item.object.gpic}}"></a>
+					<h4><a href="/{{item.object.id}}/">{{item.object.gtitle}}</a></h4>
+					<div class="operate">
+						<span class="prize">￥{{item.object.gprice}}</span>
+						<span class="unit">{{item.object.gprice}}/{{item.object.gunite}}</span>
+						<a href="/cart/add{{item.object.id}}_1/" class="add_goods" title="加入购物车"></a>
+					</div>
+				</li>
+				{%empty%}
+                    <li>啥也没找到</li>
+                {%endfor%}
+			</ul>
+			<!--显示页码数-->
+			<div class="pagenation">
+
+				<!--判断是否有上一页-->
+				{% if page.has_previous %}
+				<a href="/list{{tid}}_1_{{ orderby }}/">首页</a>
+				<a href="/list{{tid}}_{{page.number|add:-1}}_{{ orderby }}/">上一页</a>
+				{%endif%}
+
+				<!--当页码<=5页时：-->
+				{% if page.paginator.num_pages <= 5 %}
+					<!--遍历页码列表,非num_pages-->
+					{% for index in page.paginator.page_range%}
+						{% if index == page.number %}
+							<a href="#" class="active">{{index}}</a>
+						{% else %}
+							<a href="/list{{ tid }}_{{ index }}_{{ orderby }}/">{{index}}</a>
+						{% endif %}
+					{% endfor %}
+				{% else %}
+<!--当页码>5页时：-->
+<!--当前页为第一页时-->
+{% if page.number == 1 %}
+	<a href="#" class="active">1</a>
+	<a href="/list{{tid}}_2_{{orderby}}/">2</a>
+	<a href="/list{{tid}}_3_{{orderby}}/">3</a>
+	<a href="/list{{tid}}_4_{{orderby}}/">4</a>
+	<a href="/list{{tid}}_5_{{orderby}}/">5</a>
+<!--当前页为第二页时-->
+{% elif page.number == 2%}
+	<a href="/list{{tid}}_1_{{orderby}}/" >1</a>
+	<a href="#" class="active">2</a>
+	<a href="/list{{tid}}_3_{{orderby}}/">3</a>
+	<a href="/list{{tid}}_4_{{orderby}}/">4</a>
+	<a href="/list{{tid}}_5_{{orderby}}/">5</a>
+<!--当前页为倒数第二页时-->
+{% elif page.number == page.pagintor.num_pages|add:-1%}
+	<a href="/list{{tid}}_{{page.number|add:-3}}_{{orderby}}/" >{{page.number|add:-3}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-2}}_{{orderby}}/" >{{page.number|add:-2}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-1}}_{{orderby}}/" >{{page.number|add:-1}}</a>
+	<a href="/list{{tid}}_{{page.number}}_{{orderby}}/" class="active">{{page.number}}</a>
+	<a href="/list{{tid}}_{{page.number|add:1}}_{{orderby}}/" >{{page.number|add:1}}</a>
+<!--当前页为倒数第一页时-->
+{% elif page.number == page.pagintor.num_pages}
+	<a href="/list{{tid}}_{{page.number|add:-4}}_{{orderby}}/" >{{page.number|add:-4}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-3}}_{{orderby}}/" >{{page.number|add:-3}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-2}}_{{orderby}}/" >{{page.number|add:-2}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-1}}_{{orderby}}/" >{{page.number|add:-1}}</a>
+	<a href="/list{{tid}}_{{page.number}}_{{orderby}}/" class="active">{{page.number}}</a>
+<!--其他情况-->
+{% else %}
+	<a href="/list{{tid}}_{{page.number|add:-2}}_{{orderby}}/" >{{page.number|add:-2}}</a>
+	<a href="/list{{tid}}_{{page.number|add:-1}}_{{orderby}}/" >{{page.number|add:-1}}</a>
+	<a href="/list{{tid}}_{{page.number}}_{{orderby}}/" class="active">{{page.number}}</a>
+	<a href="/list{{tid}}_{{page.number|add:1}}_{{orderby}}/" >{{page.number|add:1}}</a>
+	<a href="/list{{tid}}_{{page.number|add:2}}_{{orderby}}/" >{{page.number|add:2}}</a>
+
+{% endif %}
+
+				{% endif %}
+				<!--判断是否有下一页-->
+				{%if page.has_next%}
+					<a href="/list{{tid}}_{{page.number|add:1}}_{{ orderby }}/">下一页</a>
+					<a href="/list{{tid}}_{{page.paginator.num_pages}}_{{ orderby }}/">末页</a>
+				{%endif%}
+
+			</div>
+		
+	</div>
+{% endblock content2 %}
+{% endblock content%}

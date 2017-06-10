@@ -36,9 +36,11 @@
 		<!--传入page_name=1显示购物车,不传则不显示-->
 		{%if page_name|default:0 == 1%}
 		<div class="search_con fl">
-			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
-			<input type="button" class="input_btn fr" name="" value="搜索">
-		</div>
+            <form method="get" action="/search/" target="_blank">
+			<input type="text" class="input_text fl" name="q" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" name="" value="搜索">
+            </form>
+        </div>
 
 		<div class="guest_cart fr">
 			<a href="#" class="cart_name fl">我的购物车</a>
@@ -47,9 +49,11 @@
 
 		{%else%}
 		<div class="search_con fr">
-			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+            <form method="get" action="/search/" target="_blank">
+			<input type="text" class="input_text fl" name="q" placeholder="搜索商品">
 			<input type="button" class="input_btn fr" name="" value="搜索">
-		</div>
+            </form>
+        </div>
 		{%endif%}
 
 	</div>
